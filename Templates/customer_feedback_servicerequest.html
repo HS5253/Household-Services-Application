@@ -1,0 +1,48 @@
+{% extends "customer_layout.html" %}
+
+{% block content %}
+<div class="my_panel">
+    <!-- Close Service Request -->
+    <div class="center">
+        <h2>Close Service Request</h2>
+        <p class="subtext">Please provide your feedback on our services.</p>
+    </div>
+    
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ service_request.service.name }}</h5>
+            <p class="card-text"><strong>Service Professional:</strong> {{ service_request.professional.full_name }}</p>
+            <p class="card-text"><strong>Price:</strong> ${{ service_request.professional.price }}</p>
+            <p class="card-text"><strong>Description:</strong> {{ service_request.professional.description }}</p>
+        </div>
+    </div>
+
+    <!-- Closing Form -->
+    <form action="/customer/feedback/{{service_request.id}}/{{name}}" method="POST">
+        <input type="hidden" name="service_id" value="{{service_request.service.id}}">
+        <input type="hidden" name="professional_id" value="{{service_request.professional.id}}">
+        <input type="hidden" name="customer_id" value="{{service_request.customer.id}}">
+
+        <div class="mb-3">
+            <label for="remarks" class="form-label">Remarks</label>
+            <textarea class="form-control" name="remarks" id="remarks" rows="2" placeholder="Enter your feedback here..."></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="reviews" class="form-label">Reviews</label>
+            <select class="form-control" name="reviews" id="reviews" required>
+                <option value="" disabled selected>Select a rating</option>
+                <option value="1">1 - Very Poor</option>
+                <option value="2">2 - Poor</option>
+                <option value="3">3 - Average</option>
+                <option value="4">4 - Good</option>
+                <option value="5">5 - Excellent</option>
+            </select>
+        </div>
+
+        <!-- Close Request Button -->
+        <div class="center">
+            <button type="submit" class="btn btn-outline-primary btn-lg">Submit Feedback</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

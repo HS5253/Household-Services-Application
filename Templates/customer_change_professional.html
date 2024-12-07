@@ -1,0 +1,51 @@
+{% extends "customer_layout.html" %}
+{% block content %}
+<div class="container my-4">
+    <!-- Header Section -->
+    <h2>Change Professional</h2>
+    <p class="subtext">Select a new professional for your service request: <strong>{{ service_request.service.name }}</strong></p>
+
+    <!-- Professionals Table -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Time Required</th>
+                <th>Description</th>
+                <th>Experience</th>
+                <th>Reviews</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if professionals %}
+            {% for professional in professionals %}
+            <tr>
+                <td>{{ professional.full_name }}</td>
+                <td>${{ professional.price }}</td>
+                <td>{{ service_request.service.time }}</td>
+                <td>{{ professional.description }}</td>
+                <td>{{ professional.experience }} months</td>
+                <td>{{ professional.reviews }}</td>
+                <td>
+                    <!-- Action to update the request with the selected professional -->
+                    <a href="/customer/updateprofessional/{{service_request.id}}/{{ professional.id }}/{{name}}" 
+                       class="btn btn-primary btn-sm">Select</a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="7" class="text-center">No professionals available for this service.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <!-- Back to Booking -->
+    <div class="text-center mt-3">
+        <a href="/customer/bookings/{{name}}" class="btn btn-secondary">Back to My Bookings</a>
+    </div>
+</div>
+{% endblock %}

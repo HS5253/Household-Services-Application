@@ -1,0 +1,37 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+    {% if professional %}
+        <div class="container my-4">
+            <h2 class="text-center mb-4">Service Professional Profile</h2>
+            
+            <!-- Profile Card -->
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <!-- Profile Name -->
+                    <h5 class="card-title text-center">{{ professional.full_name }}</h5>
+                    <hr>
+                    
+                    <!-- Profile Details -->
+                    <p class="card-text"><strong>Email:</strong> {{ professional.email }}</p>
+                    <p class="card-text"><strong>Service:</strong> {{ professional.service_name }}</p>
+                    <p class="card-text"><strong>Description:</strong> {{ professional.description }}</p>
+                    <p class="card-text"><strong>Experience:</strong> {{ professional.experience }} years</p>
+                    
+                    <!-- Action Buttons (Approve/Reject) -->
+                    <div class="d-flex justify-content-between mt-4">
+                        <form method="POST" action="/approve-profile/{{professional.id}}/{{name}}">
+                            <a href="/approve-profile/{{professional.id}}/{{name}}" class="btn btn-success btn-lg">Approve</a>
+                        </form>
+                        <form method="POST" action="/reject-profile/{{professional.id}}/{{name}}">
+                            <a href="/reject-profile/{{professional.id}}/{{name}}" class="btn btn-danger btn-lg">Reject</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container my-4">
+            <h2 class="text-center">No Service Professional Found</h2>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{%extends "customer_layout.html"%}
+{%block content%}
+<div class="my_panel">
+    <div class="center">
+        <h2>Your Profile</h2>
+    </div>
+    <div class="card-mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Profile Details</h5>'
+            <p class="card-text"><strong>Username(Email-id): </strong> {{ customer.email }}</p>
+            <p class="card-text"><strong>Password: </strong> {{ customer.password }}</p>
+            <p class="card-text"><strong>Full Name: </strong> {{ customer.full_name }}</p>
+            <p class="card-text"><strong>Address: </strong> {{ customer.address }}</p>
+            <p class="card-text"><strong>Pincode: </strong> {{ customer.pincode }}</p>
+            <p class="card-text"><strong>Profile Status: </strong>{{'Blocked' if customer.profile_status == 1 else 'Active'}}</p>
+            <div class="text-center">
+                <!-- Close Account Button -->
+                <form action="/customer/profile/close_account/{{customer.id}}/{{name}}" method="POST" onsubmit="return confirm('Are you sure you want to close your account? This action cannot be undone.');">
+                    <button type="submit" class="btn btn-danger">Close Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="err_msg">{{msg}}</div>
+</div>
+{%endblock%}

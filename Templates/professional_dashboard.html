@@ -1,0 +1,49 @@
+{% extends "professional_layout.html" %}
+{% block content %}
+<div class="my_panel">
+    <!-- Welcome Section -->
+    <div class="center">
+        <h2>Welcome, {{ name }}</h2>
+        <p class="subtext">Manage your services and track requests efficiently.</p>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="row mt-4">
+        <!-- Pending Service Requests -->
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Pending Requests</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ pending_requests }}</h5>
+                    <p class="card-text">View and accept/reject pending service requests.</p>
+                    <a href="/professional/pendingrequests/{{name}}" class="btn btn-light btn-sm">Manage Requests</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed Services -->
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Completed Services</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ completed_services }}</h5>
+                    <p class="card-text">Track your successfully completed services.</p>
+                    <a href="/professional/closed-requests/{{name}}" class="btn btn-light btn-sm">View History</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings -->
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header">Total Earnings</div>
+                <div class="card-body">
+                    <h5 class="card-title">${{ earnings }}</h5>
+                    <p class="card-text">Monitor your earnings from completed services.</p>
+                    <a href="/professional/earnings/{{ name }}" class="btn btn-light btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

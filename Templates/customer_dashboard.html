@@ -1,0 +1,26 @@
+{% extends "customer_layout.html" %}
+{% block content %}
+    <!-- Services Section -->
+    <div class="container my-4">
+        <h2 class="center">Available Services</h2>
+        <div class="row">
+            {% if services %}
+                {% for service in services %}
+                    <div class="col-md-4 my-3">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ service.name }}</h5>
+                                <p class="card-text"><b>Base Price:</b> {{ service.price }}</p>
+                                <p class="card-text"><b>Time Required:</b> {{ service.time }}</p>
+                                <p class="card-text"><b>Description:</b> {{ service.description }}</p>
+                                <a href="/customer/book/{{service.id}}/{{name}}" class="btn btn-outline-primary">View Professionals</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-warning w-100 text-center">No services available at the moment.</div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

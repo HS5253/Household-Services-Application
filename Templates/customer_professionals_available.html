@@ -1,0 +1,42 @@
+{%extends "customer_layout.html"%}
+{%block content%}
+        <!-- Services Table -->
+        <div class="container my-4">
+            <h2>{{service.name}}</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Time Required</th>
+                    <th>Description</th>
+                    <th>Experience</th>
+                    <th>Reviews</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%if professionals%}
+                {%for professional in professionals%}
+                <tr>
+                    <td>{{professional.full_name}}</td>
+                    <td>{{professional.price}}</td>
+                    <td>{{service.time}}</td>
+                    <td>{{professional.description}}</td>
+                    <td>{{professional.experience}}</td>
+                    <td>{{professional.reviews}}</td>
+                    <td>
+                      <a href="/customer/confirmbooking/{{service.id}}/{{professional.id}}/{{name}}" type = "button" class="btn-outline-primary">Book</a>
+                    </td
+                </tr>
+                {%endfor%}
+                {%else%}
+                <div class="err_msg">{{msg}}</div>
+                <tr>
+                    <td colspan="4">No professionals available</td>
+                </tr>
+                {%endif%}
+                </tbody>
+            </table>
+        </div>
+{%endblock%}

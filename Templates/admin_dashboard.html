@@ -1,0 +1,146 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+<!-- Dropdowns for Services, Professionals, and Service Requests -->
+<div class="container my-4">
+    <h2>Admin Dashboard</h2>
+</div>
+
+<!-- Services Table (for All Services) -->
+<div class="container my-4" id="servicesTable">
+    <h2>Manage Services</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Service Name</th>
+            <th>Base Price</th>
+            <th>Time Required</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if services %}
+        {% for service in services %}
+        <tr>
+            <td>{{ service.name }}</td>
+            <td>{{ service.price }}</td>
+            <td>{{ service.time }}</td>
+            <td>{{ service.description }}</td>
+            <td>
+                <a href="/edit_service/{{ service.id }}/{{ name }}" type="button" class="btn btn-sm btn-outline-primary">Edit</a>
+                <a href="/delete_service/{{ service.id }}/{{ name }}" type="button" class="btn btn-sm btn-outline-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <div class="err_msg">{{ msg }}</div>
+        <tr>
+            <td colspan="4">No services available.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <div class="center">
+        <a href="/addservice/{{ name }}" class="btn btn-primary">Add New Service</a>
+    </div>
+</div>
+
+<!-- Professionals Table (for All Service Professionals) -->
+<div class="container my-4" id="professionalsTable">
+    <h2>Manage Service Professionals</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>User Id</th>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Service Id</th>
+            <th>Description</th>
+            <th>Experience</th>
+            <th>Verification</th>
+            <th>Documents</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if professionals %}
+        {% for professional in professionals %}
+        <tr>
+            <td>{{ professional.user_id }}</td>
+            <td>{{ professional.email }}</td>
+            <td>{{ professional.full_name }}</td>
+            <td>{{ professional.service_id }}</td>
+            <td>{{ professional.description }}</td>
+            <td>{{ professional.experience }} years</td>
+            <td>{{ professional.verification }}</td>
+            <td>
+            {% if professional.profile_documents %}
+                <!-- Check if the file is a PDF or image -->
+                {% if professional.profile_documents.endswith('.pdf') %}
+                    <a href="{{ url_for('serve_professional_document', filename=professional.profile_documents) }}" target="_blank">View Document (PDF)</a>
+                {% elif professional.profile_documents.endswith(('.jpg', '.jpeg', '.png')) %}
+                    <img src="{{ url_for('serve_professional_document', filename=professional.profile_documents) }}" alt="Profile Document" style="width: 200px; height: auto;">
+                {% else %}
+                    <a href="{{ url_for('serve_professional_document', filename=professional.profile_documents) }}" target="_blank">View Document</a>
+                {% endif %}
+            {% else %}
+                <p>No document uploaded</p>
+            {% endif %}
+            </td>
+            <td>
+                <a href="/service-professional/{{ professional.id }}/{{ name }}" class="btn btn-sm btn-outline-primary">View Profile</a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="6">All Service Professional Verifications are complete</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Service Requests Table -->
+<div class="container my-4">
+    <h2>Manage Service Requests</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Request ID</th>
+            <th>Service</th>
+            <th>Customer Id</th>
+            <th>Professional Id</th>
+            <th>Date of Request</th>
+            <th>Date of Completion</th>
+            <th>Remarks</th>
+            <th>Reviews</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if requests %}
+        {% for service_request in requests %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ service_request.id }}</td>
+            <td>{{ service_request.service_id }}</td>
+            <td>{{ service_request.customer_id }}</td>
+            <td>{{ service_request.professional_id }}</td>
+            <td>{{ service_request.date_of_request }}</td>
+            <td>{{ service_request.date_of_completion if service_request.date_of_completion else 'Pending' }}</td>
+            <td>{{service_request.remarks}}</td>
+            <td>{{service_request.reviews}}</td>
+            <td>{{ service_request.service_status }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="8">No service requests available.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

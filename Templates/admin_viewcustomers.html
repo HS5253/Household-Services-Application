@@ -1,0 +1,45 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+<!-- Customers Table -->
+<div class="container my-4">
+    <h2>Manage Customers</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Customer Id</th>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Phone Number</th>
+            <th>Registered Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if customers %}
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.full_name }}</td>
+            <td>{{ customer.address }}</td>
+            <td>{{ customer.pincode }}</td>
+            <td>{{ 'Blocked' if customer.profile_status == 1 else 'Active' }}</td>
+            <td>
+                {% if customer.profile_status == 0 %}
+                    <a href="/admin/block/{{ customer.id }}/{{name}}" class="btn btn-sm btn-outline-success">Block</a>
+                {% else %}
+                    <a href="/admin/unblock/{{ customer.id }}/{{name}}" class="btn btn-sm btn-outline-danger">Unblock</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="7">No customers available.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

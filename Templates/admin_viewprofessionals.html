@@ -1,0 +1,73 @@
+{% extends "admin_layout.html" %}
+
+{% block content %}
+<!-- Professionals Table -->
+<div class="container my-4">
+    <h2>Manage Service Professionals</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>User Id</th>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Service Id</th>
+            <th>Description</th>
+            <th>Experience</th>
+            <th>Verification</th>
+            <th>Documents</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if professionals %}
+        {% for professional in professionals %}
+        <tr>
+            <td>{{ professional.user_id }}</td>
+            <td>{{ professional.email }}</td>
+            <td>{{ professional.full_name }}</td>
+            <td>{{ professional.service_id }}</td>
+            <td>{{ professional.description }}</td>
+            <td>{{ professional.experience }} years</td>
+            <td>{{ professional.verification }}</td>
+            <td>
+            {% if professional.profile_documents %}
+                <!-- Check if the file is a PDF or image -->
+                {% if professional.profile_documents.endswith('.pdf') %}
+                    <a href="{{ url_for('serve_professional_document', filename=professional.profile_documents) }}" target="_blank">View Document (PDF)</a>
+                {% elif professional.profile_documents.endswith(('.jpg', '.jpeg', '.png')) %}
+                    <img src="{{ url_for('serve_professional_document', filename=professional.profile_documents) }}" alt="Profile Document" style="width: 200px; height: auto;">
+                {% else %}
+                    <a href="{{ url_for('serve_professional_document', filename=professional.profile_documents) }}" target="_blank">View Document</a>
+                {% endif %}
+            {% else %}
+                <p>No document uploaded</p>
+            {% endif %}
+            </td>
+            <td>
+                <!-- Display current status (Active or Blocked) -->
+                {% if professional.profile_status == 0 %}
+                    <span class="badge bg-success">Active</span>
+                {% else %}
+                    <span class="badge bg-danger">Blocked</span>
+                {% endif %}
+            </td>
+            <td>
+                <!-- Action buttons (Block or Unblock) -->
+                {% if professional.profile_status == 0 %}
+                    <a href="/admin/block/professional/{{ professional.id }}/{{name}}" class="btn btn-sm btn-outline-danger">Block</a>
+                {% else %}
+                    <a href="/admin/unblock/professional/{{ professional.id }}/{{name}}" class="btn btn-sm btn-outline-success">Unblock</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="10">No service professionals available.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

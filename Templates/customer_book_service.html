@@ -1,0 +1,46 @@
+{% extends "customer_layout.html" %}
+
+{% block content %}
+<div class="my_panel">
+    <!-- Service and Professional Details -->
+    <div class="center">
+        <h2>Book Service</h2>
+        <p class="subtext">Enter the below required details to send request to the service provider.</p>
+    </div>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ service.name }}</h5>
+            <p class="card-text"><strong>Service Professional:</strong> {{ professional.full_name }}</p>
+            <p class="card-text"><strong>Experience:</strong> {{ professional.experience }} months</p>
+            <p class="card-text"><strong>Price:</strong> ${{ professional.price }}</p>
+            <p class="card-text"><strong>Description:</strong> {{ professional.description }}</p>
+        </div>
+    </div>
+    
+    <!-- Booking Form -->
+    <form action="/customer/confirmbooking/{{service.id}}/{{professional.id}}/{{name}}" method="POST">
+        <input type="hidden" name="service_id" value="{{service.id}}">
+        <input type="hidden" name="professional_id" value="{{professional.id}}">
+        <input type="hidden" name="customer_id" value="{{customer.id}}">
+
+        <div class="mb-3">
+            <label for="date_time" class="form-label">Date and Time of Service</label>
+            <input type="datetime-local" class="form-control" name="date_time" id="date_time" required>
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Your Address</label>
+            <!-- Populate the text area with the customer's address -->
+            <textarea class="form-control" name="address" id="address" required>{{ customer.address }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="pincode" class="form-label">Your Pincode</label>
+            <textarea class="form-control" name="pincode" id="pincode" required>{{ customer.pincode }}</textarea>
+        </div>
+        
+        <!-- Confirm Button -->
+        <div class="center">
+            <button type="submit" class="btn btn-success btn-lg">Confirm Booking</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

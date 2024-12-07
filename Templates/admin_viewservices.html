@@ -1,0 +1,41 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+<!-- Services Table -->
+<div class="container my-4">
+    <h2>Manage Services</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Service Name</th>
+            <th>Base Price</th>
+            <th>Time Required</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if services %}
+        {% for service in services %}
+        <tr>
+            <td>{{ service.name }}</td>
+            <td>{{ service.price }}</td>
+            <td>{{ service.time }}</td>
+            <td>{{ service.description }}</td>
+            <td>
+                <a href="/edit_service/{{ service.id }}/{{ name }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                <a href="/delete_service/{{ service.id }}/{{ name }}" class="btn btn-sm btn-outline-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="5">No services available.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <div class="center">
+        <a href="/addservice/{{ name }}" class="btn btn-primary">Add New Service</a>
+    </div>
+</div>
+{% endblock %}

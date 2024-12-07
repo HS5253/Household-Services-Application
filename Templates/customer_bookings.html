@@ -1,0 +1,65 @@
+{%extends "customer_layout.html"%}
+{%block content%}
+<div class="my_panel">
+    <div class="center">
+        <h2>My Bookings</h2>
+        <p class="subtext">Here are all your service bookings</p>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Service Name</th>
+                <th>Name of the service provider</th>
+                <th>Date & Time</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Remarks</th>
+                <th>Reviews</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%if service_requests%}
+            {%for service_request in service_requests%}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{service_request.service.name}}</td>
+                <td>{{service_request.professional.full_name}}</td>
+                <td>{{service_request.date_of_request}}</td>
+                <td>{{service_request.customer.address}}</td>
+                <td>
+                    <span class="badge {% if service_request.service_status == 'Requested' %}bg-warning
+                                    {% elif service_request.service_status == 'Confirmed' %}bg-primary
+                                    {% elif service_request.service_status == 'Completed' %}bg-success
+                                    {% elif service_request.service_status =='Rejected'%}bg-danger
+                                    {% else %}bg-secondary{% endif %}">
+                        {{ service_request.service_status }}
+                    </span>
+                </td>
+                <td>{{service_request.remarks}}</td>
+                <td>{{service_request.reviews}}</td>
+                <td>
+                    {% if service_request.service_status=='requested'%}
+                        <a href="/customer/editrequest/{{ service_request.id }}/{{ name }}" type = "button" class="btn btn-sm btn-primary">Edit booking</a>
+                        <a href="/customer/delete_request/{{ service_request.id}}/{{ name }}" type = "button" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
+                    {% elif service_request.service_status=='confirmed'%}
+                        <a href="/customer/delete_request/{{ service_request.id}}/{{ name }}" type = "button" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
+                    {% elif service_request.service_status == 'completed' %}
+                        <!-- If the request is 'Completed', show only the feedback option -->
+                        <a href="/customer/feedback/{{ service_request.id }}/{{name}}" type="button" class="btn btn-sm btn-info">Provide Feedback</a>
+                    {% elif service_request.service_status == 'rejected' %}
+                        <a href="/customer/editrequest/{{ service_request.id }}/{{ name }}" type = "button" class="btn btn-sm btn-primary">Change Service Provider</a>
+                    {%endif%}
+                </td>
+            </tr>
+            {%endfor%}
+            {%else%}
+            <tr>
+                <td colspan="7" class="text-center">No bookings found.</td>
+            </tr>
+            {%endif%}
+        </tbody>
+    </table>
+</div>
+{%endblock%}

@@ -1,0 +1,50 @@
+{% extends "professional_layout.html" %}
+
+{% block content %}
+<div class="my_container">
+    <div class="center">
+        <h2>Edit Your Services</h2>
+    </div>
+    <div class="my_panel">
+        <form action="/professional/edit_services/{{ professional.id }}/{{name}}" method="POST">
+            <div class="center">
+                <div class="err_msg">{{ msg }}</div>
+            </div>
+            <div class="input_form">
+                <div class="mb-3">
+                    <label for="service_name" class="form-label">Service</label>
+                    <select class="form-control" name="service_name" id="service_name" required>
+                        {%if services%}
+                            {% for service in services %}
+                                <option value="{{service.id}}">{{ service.name }}</option>
+                            {% endfor %}
+                        {%else%}
+                            <option value = "services">No services available</option>
+                        {%endif%}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price (price as low as base price)</label>
+                    <input type="number" class="form-control" name="price" id="price" 
+                           placeholder= "Enter price" required>
+                </div>
+                <div class="mb-3">
+                    <label for="experience" class="form-label">Experience (in months)</label>
+                    <input type="number" class="form-control" name="experience" id="experience" 
+                           placeholder="10" value="{{ professional.experience }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" name="description" id="description" rows="3" required></textarea>
+                </div>
+                <div class="mb-3 center">
+                    <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+                </div>
+                <div class="center">
+                    <a href="/professional/profile/{{name}}" class="btn btn-secondary btn-sm">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

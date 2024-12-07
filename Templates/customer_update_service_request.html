@@ -1,0 +1,63 @@
+{% extends "customer_layout.html" %}
+
+{% block content %}
+<div class="my_panel">
+    <!-- Edit Service Request -->
+    <div class="center">
+        <h2>Edit Service Request</h2>
+        <p class="subtext">Update the service professional and/or date and time.</p>
+    </div>
+    
+    <!-- Service Details -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ service_request.service.name }}</h5>
+            <p class="card-text"><strong>Current Professional:</strong> {{ service_request.professional.full_name }}</p>
+            <p class="card-text"><strong>Experience:</strong> {{ service_request.professional.experience }} months</p>
+            <p class="card-text"><strong>Price:</strong> ${{ service_request.professional.price }}</p>
+            <p class="card-text"><strong>Description:</strong> {{ service_request.professional.description }}</p>
+        </div>
+    </div>
+
+    <!-- Change Professional -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Selected Professional</h5>
+            <p class="card-text"><strong>Professional Name:</strong> {{ professional.full_name }}</p>
+            <p class="card-text"><strong>Experience:</strong> {{ professional.experience }} months</p>
+            <p class="card-text"><strong>Price:</strong> ${{ professional.price }}</p>
+            <p class="card-text"><strong>Description:</strong> {{ professional.description }}</p>
+        </div>
+    </div>
+
+    <!-- Booking Form -->
+    <form action="/customer/updateprofessional/{{service_request.id}}/{{professional.id}}/{{name}}" method="POST">
+        <input type="hidden" name="service_id" value="{{ service_request.service_id }}">
+        <input type="hidden" name="customer_id" value="{{ service_request.customer_id }}">
+        <input type="hidden" name="professional_id" value="{{ professional.id }}">
+
+        <!-- Date and Time -->
+        <div class="mb-3">
+            <label for="date_time" class="form-label">Date and Time of Service</label>
+            <input type="datetime-local" class="form-control" name="date_time" id="date_time" value="{{ service_request.date_of_request }}" required>
+        </div>
+
+        <!-- Address -->
+        <div class="mb-3">
+            <label for="address" class="form-label">Your Address</label>
+            <textarea class="form-control" name="address" id="address" rows="3" required>{{ service_request.customer.address }}</textarea>
+        </div>
+
+        <!-- Pincode -->
+        <div class="mb-3">
+            <label for="pincode" class="form-label">Your Pincode</label>
+            <textarea class="form-control" name="pincode" id="pincode" rows="1" required>{{ service_request.customer.pincode }}</textarea>
+        </div>
+
+        <!-- Confirm Button -->
+        <div class="center">
+            <button type="submit" class="btn btn-success btn-lg">Update Booking</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

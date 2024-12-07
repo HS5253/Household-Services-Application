@@ -1,0 +1,142 @@
+
+/* Custom Styles */
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Centering text */
+.center {
+    text-align: center;
+    margin: auto;
+    color: rgb(5, 5, 110);
+}
+
+/* Container with borders */
+.my_container {
+    border: 2px solid black;
+    padding: 20px;
+}
+
+/* Panel container */
+.my_panel {
+    width: 100%;
+    margin: auto;
+    height: auto;
+    border: 1px dashed black;
+}
+
+/* Input Form Styling */
+.input_form {
+    border: 1px solid blue;
+    width: 600px;
+    height: auto;
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    text-align: justify;
+}
+
+/* Outer Box */
+.outer_box {
+    border: 1px solid orange;
+    margin-top: 10px;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Error message style */
+.err_msg {
+    text-align: center;
+    margin: auto;
+    color: maroon;
+}
+
+/* Navbar */
+.navbar-text.ml-right {
+    float: right;
+    padding-right: 20px;
+}
+
+/* Search bar container */
+.navbar-text.ml-auto {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navbar-text.ml-auto input {
+    margin-right: 10px;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.navbar-text.ml-auto button {
+    background-color: #28a745;
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+/* Ensuring proper alignment of navbar items */
+.navbar-nav {
+    display: flex;
+    flex: 1;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 20px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(5, 5, 5, 0.93);
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+}
+  
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+  
+.dropdown-item {
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+    color: black;
+}
+  
+.dropdown-item:hover {
+    background-color: #0d0d0d;
+}
+  
+/* Styles for the logo in the header */
+.center h1 img {
+    width: 100px; /* Increase the size */
+    height: 100px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+/* Styles for the logo in the navbar */
+.navbar-brand img {
+    width: 60px; /* Larger size */
+    height: 60px;
+    margin-right: 10px;
+}

@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/styles/main.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="icon" type="image/png" href="/static/images/logo.png">
+        <title>Signup Page</title>
+    </head>
+    <body>
+        <div class="my_container">
+            <div class="center">
+                <h1><img src="/static/images/logo.png" alt="Logo" style="width: 50px; height: 50px; vertical-align: middle;"> Has Services</h1>
+            </div>
+            <div class="my_panel">
+                <div class="center">
+                    <h3>Create Your Account</h3>
+                    <p class="subheading">Sign up to book your cleaning services hassle-free!</p>
+                </div>
+                <form action="/register/professional" method="POST" enctype="multipart/form-data">
+                    <div class="center">
+                        <div class="err_msg">{{msg}}</div>
+                    </div>
+                    <div class="input_form">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Email-Id</label>
+                            <input type="email" class="form-control" name="username" id="username" 
+                                   placeholder="abc@gmail.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" 
+                                   placeholder="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fullname" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" name="fullname" id="fullname" 
+                                   placeholder="Your Full Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="service_name" class="form-label">Service</label>
+                            <select class="form-control" name="service_name" id="service_name" required>
+                                {%if services%}
+                                    {% for service in services %}
+                                        <option value="{{service.id}}">{{ service.name }}</option>
+                                    {% endfor %}
+                                {%else%}
+                                    <option value = "services">No services available</option>
+                                {%endif%}
+
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price (price as low as base price)</label>
+                            <input type="number" class="form-control" name="price" id="price" 
+                                   placeholder= "Enter price" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="experience" class="form-label">Experience (in months)</label>
+                            <input type="number" class="form-control" name="experience" id="experience" 
+                                   placeholder="10" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" class="form-control" name="description" id="description" 
+                                   placeholder="Description" required>
+                        <div class="mb-3">
+                            <label for="profile_documents" class="form-label">Upload Your Documents</label>
+                            <input type="file" class="form-control" name="profile_documents" id="profile_documents" required>
+                            <small class="form-text text-muted">Upload any relevant documents such as ID proof or certifications.</small>
+                        </div>
+                        <div class="mb-3 center">
+                            <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                        </div>
+                        <div class="center">
+                            <p>Already have an account? <a href="/login">Login here</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

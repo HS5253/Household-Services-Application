@@ -1,0 +1,45 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+<!-- Service Requests Table -->
+<div class="container my-4">
+    <h2>Manage Service Requests</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Request ID</th>
+            <th>Service</th>
+            <th>Customer Id</th>
+            <th>Professional Id</th>
+            <th>Date of Request</th>
+            <th>Date of Completion</th>
+            <th>Remarks</th>
+            <th>Reviews</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if requests %}
+        {% for service_request in requests %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ service_request.id }}</td>
+            <td>{{ service_request.service_id }}</td>
+            <td>{{ service_request.customer_id }}</td>
+            <td>{{ service_request.professional_id }}</td>
+            <td>{{ service_request.date_of_request }}</td>
+            <td>{{ service_request.date_of_completion if service_request.date_of_completion else 'Pending' }}</td>
+            <td>{{service_request.remarks}}</td>
+            <td>{{service_request.reviews}}</td>
+            <td>{{ service_request.service_status }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="8">No service requests available.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

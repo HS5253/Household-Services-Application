@@ -1,0 +1,134 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Centering text */
+.center {
+    text-align: center;
+    margin: auto;
+    color: rgb(5, 5, 110);
+}
+
+/* Container with borders */
+.my_container {
+    border: 1px solid #ddd; /* Softer border */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Panel container */
+.my_panel {
+    width: 100%;
+    margin: auto;
+    padding: 20px; /* Added padding */
+    border: 1px dashed #ccc; /* Softer dashed line */
+    border-radius: 8px; /* Slight rounding */
+    background-color: #fff; /* Contrasting white background */
+}
+
+/* Input Form Styling */
+.input_form {
+    border: 1px solid #007bff; /* Bootstrap primary color */
+    width: 600px;
+    padding: 15px; /* Increased padding */
+    margin: 20px auto;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #e9f5ff; /* Light blue background */
+    text-align: left; /* Better alignment */
+}
+
+/* Outer Box */
+.outer_box {
+    border: 1px solid #ff9800; /* Slightly darker orange */
+    padding: 15px;
+    margin: 10px auto;
+    border-radius: 8px;
+    background-color: #fffaf0; /* Soft yellow background */
+}
+
+/* Flash messages */
+.alert {
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 10px auto;
+    width: 80%; /* Centered and constrained */
+}
+
+/* Navbar */
+.navbar-nav .nav-link {
+    font-family: 'Arial', sans-serif; /* Set the same font for all links */
+    font-weight: 500; /* Optional: Control the font weight */
+    font-size: 20; /* Uniform font size */
+    color: #333; /* Text color for links */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff; /* Hover color */
+}
+
+.navbar-nav .nav-link.active {
+    font-size: 20;
+}
+
+.navbar-text.ml-auto {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px; /* Space between items */
+}
+
+.navbar-text.ml-auto input {
+    border: 1px solid #ccc; /* Neutral border */
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    width: 200px; /* Constrained input width */
+}
+
+.navbar-text.ml-auto button {
+    background-color: #28a745; /* Green button */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.navbar-text.ml-auto button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Footer */
+.footer {
+    color: #666; /* Softer text color */
+    font-size: 14px;
+    margin-top: 20px;
+    border-top: 1px solid #ddd; /* Subtle top border */
+    padding-top: 10px;
+}
+
+.card-body {
+    min-height: 180px; /* Ensures equal height for all cards */
+}
+
+/* Styles for the logo in the header */
+.center h1 img {
+    width: 100px; /* Increase the size */
+    height: 100px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+/* Styles for the logo in the navbar */
+.navbar-brand img {
+    width: 60px; /* Larger size */
+    height: 60px;
+    margin-right: 10px;
+}

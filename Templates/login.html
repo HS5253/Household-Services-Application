@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/styles/main.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="icon" type="image/png" href="/static/images/logo.png">
+        <title>Login Page</title>
+    </head>
+    <body>
+        <div class="my_container">
+            <div class="center">
+                <img src="/static/images/logo.png" alt="Has Servicing Logo" style="width: 100px; height: 100px; vertical-align: middle; margin-right: 10px;">
+                <h2>Has Cleaning Services</h2>
+            </div>
+            <div class="my_panel">
+                <div class="center">
+                    <h3>Login</h3>
+                </div>
+                <form action="/login" method="POST">
+                    <div class="input_form">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">User Name(Email-Id)</label>
+                            <input type="email" class="form-control" name="username" id="username" placeholder="abc@gmail.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="password" required>
+                        </div>
+                        <div class="mb-3 center">
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="registration_section">
+                    <p class="center">New Here? Create an Account:</p>
+                    <div class="btn-group d-flex justify-content-center" role="group">
+                        <a href="/register" class="btn btn-secondary">Customer Account</a>
+                        <a href="/register/professional" class="btn btn-secondary">Service Professional Account</a>
+                    </div>
+                </div>
+                <div class="err_msg">{{msg}}</div>
+            </div>
+        </div>
+    </body>
+</html>
+

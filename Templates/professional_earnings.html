@@ -1,0 +1,55 @@
+{% extends "professional_layout.html" %}
+
+{% block content %}
+<div class="my_panel">
+    <!-- Welcome Section -->
+    <div class="center">
+        <h2>Earnings Overview, {{ name }}</h2>
+        <p class="subtext">Track your earnings from completed services.</p>
+    </div>
+
+    <!-- Earnings Summary -->
+    <div class="mt-4">
+        <h4>Summary</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Total Earnings</th>
+                    <th scope="col">Average Earnings per Service</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>${{ total_earnings }}</td>
+                    <td>${{ average_earnings }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Monthly Earnings Table -->
+    <div class="mt-4">
+        <h4>Monthly Earnings Overview</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Month</th>
+                    <th scope="col">Total Earnings</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for month, earnings in monthly_earnings.items() %}
+                <tr>
+                    <td>{{ month }}</td>
+                    <td>${{ earnings }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2" class="text-center">No earnings data available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

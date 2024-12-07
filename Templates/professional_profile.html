@@ -1,0 +1,72 @@
+{% extends "professional_layout.html" %}
+{% block content %}
+<div class="my_panel">
+    <!-- Profile Section -->
+    <div class="center">
+        <h2>Profile Overview</h2>
+
+    </div>
+
+    <!-- Profile Details -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Profile Details</div>
+                <div class="card-body">
+                    <h5 class="card-title">Name: {{ professional.full_name }}</h5>
+                    <p class="card-text">Email: {{ professional.email }}</p>
+                    <p class="card-text">Reviews: {{ professional.reviews }}</p>
+                    <p class="card-text">Description: {{ professional.description }}</p>
+                    <p class="card-text">Status: 
+                        {% if professional.verification == 'approved'  %}
+                            <span class="text-success">Approved</span>
+                        {% elif professional.verification == 'rejected'  %}
+                            <span class="text-danger">Rejected</span>
+                        {% else %}
+                            <span class="text-warning">Pending Approval</span>
+                        {% endif %}
+                    </p>
+                    <a href="/professional/edit_profile/{{professional.id}}/{{ name }}" class="btn btn-primary btn-sm">Edit Profile</a>
+                    <p class="card-text">Profile Status: {{'Blocked' if professional.profile_status == 1 else 'Active'}}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Services Offered</div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Service Name</th>
+                                <th>Price</th>
+                                <th>Experience</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                            <tr>
+                                <td>{{ service.name }}</td>
+                                <td>{{ professional.price }}</td>
+                                <td>{{professional.experience}}</td>
+                                <td>{{professional.description}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="/professional/edit_services/{{professional.id}}/{{ name }}" class="btn btn-secondary btn-sm">Edit Service</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="err_msg">{{msg}}</div>
+    <div class="text-center">
+        <!-- Close Account Button -->
+        <form action="/professional/profile/close_account/{{professional.id}}/{{name}}" method="POST" onsubmit="return confirm('Are you sure you want to close your account? This action cannot be undone.');">
+            <button type="submit" class="btn btn-danger">Close Account</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
